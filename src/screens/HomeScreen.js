@@ -10,12 +10,11 @@ import {
   } from 'react-native';
   import React, {useRef, useState} from 'react';
   import {TextInput} from 'react-native-paper';
-//   import {colors} from './src/utils/colors';
-import {colors} from "../utils/colors"
+  import {colors} from '../utils/colors';
   import { Dropdown } from 'react-native-element-dropdown';
   
   
-  const HomeScreen = ({navigation}) => {
+  const HomeScreen = () => {
     const [fullName, setFullName] = useState('');
     const [creditCardNumber, setCreditCardNumber] = useState('');
   
@@ -123,7 +122,10 @@ import {colors} from "../utils/colors"
       console.log("S_______ expiryDate ", expiryDate);
       console.log("S_______ address ", address);
       setValidateClick(true);
-      navigation.navigate("TabNavigator")
+  
+      if(fullName != '' && creditCardNumber != '' &&  expiryDate!= '' && address!= ''){
+          alert("FullName :- " + fullName + "\nCredit Card Number " +creditCardNumber  + "\nExpiry Date " +expiryDate + "\nAddress " +address)
+      }
   
       
     };
@@ -212,11 +214,9 @@ import {colors} from "../utils/colors"
           returnKeyType="next"
           label=" Expiry Date (MM/YY)"
           keyboardType={'numeric'}
-          // underlineColorAndroid={'rgba(0,0,0,0)'}
           text="white"
           maxLength={5}
           onChangeText={text => handleChangeExpiryDate(text)}
-          // onBlur={formatExpiryDate}
           left={<TextInput.Icon color={colors.black} name={'clock'} />}
           right={
             <TextInput.Icon
@@ -227,9 +227,7 @@ import {colors} from "../utils/colors"
           value={expiryDate}
           defaultValue={expiryDate}
           theme={styles.textInputOutlineStyle}
-          onSubmitEditing={() => {
-            onPressValidateExpiryDate();
-          }}
+          
         />
   
   {( expiryDate == '' &&  validateClick)  && (
@@ -240,7 +238,7 @@ import {colors} from "../utils/colors"
   
         {expiryDateError && (
           <Text style={{paddingLeft: 20, color: colors.red, fontSize: 20}}>
-            {'Past date is not allowed'}
+            {'Card is Expired'}
           </Text>
         )}
   
@@ -255,16 +253,20 @@ import {colors} from "../utils/colors"
           <View style={{marginBottom: 20}}></View>
           <Dropdown
             data={[
-              {address: '2d 96'},
-              {address: '1274'},
-              {address: '2010'},
-              {address: 'Delhi office'},
+              {address: '2d 96 Faridabad 121005'},
+              {address: '1274 Parvatiya Colony FBd 121005'},
+              {address: '2010 Parvatiya Colony FBd 121005'},
+              {address: '12 CP Delhi office 110044'},
             ]}
             dropdownPosition={'bottom'}
             labelField="address"
             valueField="address"
             placeholder="Select Address"
             searchPlaceholder="Search..."
+            itemContainerStyle={{color:'red',}}
+            itemTextStyle={{color:'black'}}
+            selectedStyle={{color:'yellow'}}
+            containerStyle={{backgroundColor:'grey' , marginBottom:20}}
             value={address}
             defaultValue={address}
             onChange={item => {

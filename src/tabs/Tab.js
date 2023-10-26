@@ -7,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
-import SignUp from '../screens/SignUp';
+
 import Orders from '../screens/Orders';
 import WeatherScreen from '../screens/WeatherScreen';
 
@@ -46,17 +46,7 @@ export default function Tabnavigator({ route, navigation }) {
                     }}
                 />
 
-                <Tab.Screen
-                    name="SignUp"
-                    component={SignUp}
-                    options={{
-                        headerShown: false,
-                        tabBarLabel: 'SignUp',
-                        tabBarIcon: ({ focused, color, size }) => (
-                            <Ionicons name={'server'} size={22} color={focused ? 'red' : 'black'} />
-                        ),
-                    }}
-                />
+                
 
 
                 <Tab.Screen
